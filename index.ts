@@ -16,6 +16,22 @@ class ultraJDB {
         this.path_folder = data.path_folder;
         this.path_database = data.path_database
     }
+
+    set(key: string, value: any) {
+        if (!key) throw new ErrorUJDB("Invalid Value", "You must provide a key to store the value");
+        if (!value && value != 0) throw new ErrorUJDB("Invalid Value", "You must provide a value to be stored");
+        const obj = {
+            [key]: value
+        }
+        try {
+            writeFileSync(this.path_database, JSON.stringify(obj, null, 2), {
+                flag: "w+",
+                encoding: 'utf-8'
+            })
+        } catch (err) {
+            throw err
+        }
+    }
 }
 
 export = ultraJDB
