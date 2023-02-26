@@ -1,0 +1,7 @@
+/Errors
+/Utils
+/node_modules
+/package-lock.json
+index.ts
+tsconfig.json
+.gitattributes
