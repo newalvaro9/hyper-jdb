@@ -12,7 +12,7 @@ class ultraJDB {
     path_database: string
 
     constructor(public name: string) {
-        if (!name) throw new ErrorUJDB("Invalid Value", "You must provide a name to your database")
+        if (!name) throw new ErrorUJDB("Missing argument", "You must provide a name to your database")
         const data = create_database(name)
         this.name = name;
         this.path_folder = data.path_folder;
@@ -20,8 +20,8 @@ class ultraJDB {
     }
 
     set(key: string, value: any) {
-        if (!key) throw new ErrorUJDB("Invalid Value", "You must provide a key to store the value");
-        if (!value && value != 0) throw new ErrorUJDB("Invalid Value", "You must provide a value to be stored");
+        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to store the value");
+        if (!value && value != 0) throw new ErrorUJDB("Missing argument", "You must provide a value to be stored in the database");
 
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
@@ -49,8 +49,8 @@ class ultraJDB {
     }
 
     get(key: string) {
-        if (!key) throw new ErrorUJDB("Invalid Value", "You must provide a key to be searched in the database");
-        
+        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
+
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
 
@@ -65,7 +65,7 @@ class ultraJDB {
     }
 
     delete(key: string) {
-        if (!key) throw new ErrorUJDB("Invalid Value", "You must provide a key to be searched in the database");
+        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be deleted from the database");
 
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
