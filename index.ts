@@ -29,9 +29,12 @@ class ultraJDB {
         let jsonRoute: Array<string> = key.split(".")
         let jsonObject: any = databasesObj[this.name];
 
-        for (const prop of jsonRoute) {
-            if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
+        for (let i = 0; i < jsonRoute.length; i++) {
+            const prop = jsonRoute[i];
+            if (i === jsonRoute.length - 1) { /* Last iteration of the loop */
                 jsonObject[prop] = value /* Set given value */
+            } else {
+                jsonObject[prop] = jsonObject[prop] || {}; /* Initialize sub-object if it doesn't exist */
             }
             jsonObject = jsonObject[prop];
         }
