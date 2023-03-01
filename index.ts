@@ -5,6 +5,7 @@ import create_database from "./Utils/create_database"
 import { writeFileSync } from "fs"
 import read_file from "./Utils/read_file"
 
+let databasesObj: any = {}
 
 class ultraJDB {
     path_folder: string
