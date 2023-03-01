@@ -22,10 +22,13 @@ class ultraJDB {
     set(key: string, value: any) {
         if (!key) throw new ErrorUJDB("Invalid Value", "You must provide a key to store the value");
         if (!value && value != 0) throw new ErrorUJDB("Invalid Value", "You must provide a value to be stored");
-        const obj = {
-            [key]: value
-        }
+
+        let response = read_file(this.path_database);
+        databasesObj[this.name] = response;
+        console.log(databasesObj)
+        
         try {
+            writeFileSync(this.path_database, JSON.stringify(databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
             throw err
         }
