@@ -117,6 +117,33 @@ class ultraJDB {
         return true
     }
 
+    substract(key: string, quantity: number) {
+        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
+        if (!quantity) throw new ErrorUJDB("Missing argument", `You must provide a number to be substracted from \`${key}\``)
+        if (isNaN(quantity)) throw new ErrorUJDB("Invalid value", "The `quantity` parameter must be a number")
+
+        let response = read_file(this.path_database);
+        databasesObj[this.name] = response;
+
+        let jsonRoute: Array<string> = key.split(".")
+        let jsonObject: any = databasesObj[this.name];
+
+        for (const prop of jsonRoute) {
+            if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
+                if (isNaN(jsonObject[prop])) throw new ErrorUJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not a number`)
+                jsonObject[prop] = jsonObject[prop] - quantity
+            }
+            jsonObject = jsonObject[prop];
+        }
+
+        try {
+            writeFileSync(this.path_database, JSON.stringify(databasesObj[this.name], null, 2), 'utf-8')
+        } catch (err) {
+            throw new ErrorUJDB("Writing error", "There was an error updating your database")
+        }
+
+        return true
+    }
 }
 
 export = ultraJDB
