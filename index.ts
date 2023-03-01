@@ -25,8 +25,17 @@ class ultraJDB {
 
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
-        console.log(databasesObj)
-        
+
+        let jsonRoute: Array<string> = key.split(".")
+        let jsonObject: any = databasesObj[this.name];
+
+        for (const prop of jsonRoute) {
+            if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
+                jsonObject[prop] = value /* Set given value */
+            }
+            jsonObject = jsonObject[prop];
+        }
+
         try {
             writeFileSync(this.path_database, JSON.stringify(databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
