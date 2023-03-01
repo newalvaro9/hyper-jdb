@@ -39,7 +39,7 @@ class ultraJDB {
         try {
             writeFileSync(this.path_database, JSON.stringify(databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
-            throw new ErrorUJDB("Writing error", "There was an error updating your database", err)
+            throw new ErrorUJDB("Writing error", "There was an error updating your database")
         }
     }
 }
