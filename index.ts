@@ -26,10 +26,6 @@ class ultraJDB {
             [key]: value
         }
         try {
-            writeFileSync(this.path_database, JSON.stringify(obj, null, 2), {
-                flag: "w+",
-                encoding: 'utf-8'
-            })
         } catch (err) {
             throw err
         }
