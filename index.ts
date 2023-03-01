@@ -41,6 +41,8 @@ class ultraJDB {
         } catch (err) {
             throw new ErrorUJDB("Writing error", "There was an error updating your database")
         }
+
+        return true
     }
 
     get(key: string) {
