@@ -42,6 +42,22 @@ class ultraJDB {
             throw new ErrorUJDB("Writing error", "There was an error updating your database")
         }
     }
+
+    get(key: string) {
+        if (!key) throw new ErrorUJDB("Invalid Value", "You must provide a key to be searched in the database");
+        
+        let response = read_file(this.path_database);
+        databasesObj[this.name] = response;
+
+        let jsonRoute: Array<string> = key.split(".")
+        let jsonObject: any = databasesObj[this.name];
+
+        for (const prop of jsonRoute) {
+            jsonObject = jsonObject[prop];
+        }
+
+        return jsonObject
+    }
 }
 
 export = ultraJDB
