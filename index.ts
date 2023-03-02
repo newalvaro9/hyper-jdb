@@ -23,7 +23,7 @@ class ultraJDB {
     }
 
     /**
-     * 
+     * Sets a value into the database
      * @param {string} key JSON key to store data
      * @param {any} value The value to be stored
      * @returns {true}
@@ -58,7 +58,7 @@ class ultraJDB {
     }
 
     /**
-     * 
+     * Gets an existing key from the database.
      * @param {string} key JSON key to be searched
      * @returns {any} The stored value
      */
@@ -79,7 +79,7 @@ class ultraJDB {
     }
 
     /**
-     * 
+     * Deletes an existing key from the database.
      * @param {string} key JSON key to search and delete
      * @returns {true}
      */
@@ -117,7 +117,7 @@ class ultraJDB {
     }
 
     /**
-     * 
+     * Searches the given key.
      * @param {string} key The key to be searched
      * @returns {boolean} True if found, false if not
      */
@@ -146,7 +146,7 @@ class ultraJDB {
     }
 
     /**
-     * 
+     * Pushes to the given array a new value.
      * @param {string} key 
      * @param {any} value 
      * @returns The new array 
@@ -182,7 +182,7 @@ class ultraJDB {
     }
 
     /**
-     * 
+     * Adds to the given key the quantity provided
      * @param {string} key JSON key to be searched
      * @param {number} quantity Amount to be added
      * @returns {number} Updated value
@@ -217,7 +217,7 @@ class ultraJDB {
     }
 
     /**
-     * 
+     * Substracts from the given key the quantity provided
      * @param {string} key JSON key to be searched
      * @param {number} quantity Amount to be substracted
      * @returns {number} Updated value
@@ -253,6 +253,7 @@ class ultraJDB {
     }
 
     /**
+     * Clears **all** the data in the .json file
      * @returns {true}
      */
     drop(): true {
