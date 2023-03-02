@@ -127,7 +127,7 @@ class ultraJDB {
         var last: number = 0;
         for (const prop of jsonRoute) {
             if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
-                if (isNaN(jsonObject[prop])) throw new ErrorUJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not a number`)
+                if (isNaN(jsonObject[prop])) throw new ErrorUJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not a Number`)
                 jsonObject[prop] = jsonObject[prop] + quantity
                 last = jsonObject[prop]
             }
