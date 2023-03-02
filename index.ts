@@ -178,6 +178,18 @@ class ultraJDB {
 
         return last
     }
+
+    /**
+     * @returns {true}
+     */
+    drop(): true {
+        try {
+            writeFileSync(this.path_database, JSON.stringify({}, null, 2), 'utf-8')
+        } catch (err) {
+            throw new ErrorUJDB("Writing error", "There was an error updating your database")
+        }
+        return true
+    }
 }
 
 export = ultraJDB
