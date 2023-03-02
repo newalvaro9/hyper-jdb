@@ -5,3 +5,4 @@
 index.ts
 tsconfig.json
 .gitattributes
+.gitignore
