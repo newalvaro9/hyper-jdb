@@ -90,6 +90,7 @@ class ultraJDB {
     }
 
     add(key: string, quantity: number) {
+    add(key: string, quantity: number): number {
         if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
         if (!quantity) throw new ErrorUJDB("Missing argument", `You must provide a number to be added to \`${key}\``)
         if (isNaN(quantity)) throw new ErrorUJDB("Invalid value", "The `quantity` parameter must be a number")
@@ -100,10 +101,12 @@ class ultraJDB {
         let jsonRoute: Array<string> = key.split(".")
         let jsonObject: any = databasesObj[this.name];
 
+        var last: number = 0;
         for (const prop of jsonRoute) {
             if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
                 if (isNaN(jsonObject[prop])) throw new ErrorUJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not a number`)
                 jsonObject[prop] = jsonObject[prop] + quantity
+                last = jsonObject[prop]
             }
             jsonObject = jsonObject[prop];
         }
@@ -114,10 +117,11 @@ class ultraJDB {
             throw new ErrorUJDB("Writing error", "There was an error updating your database")
         }
 
-        return true
+        return last
     }
 
     substract(key: string, quantity: number) {
+    substract(key: string, quantity: number): number {
         if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
         if (!quantity) throw new ErrorUJDB("Missing argument", `You must provide a number to be substracted from \`${key}\``)
         if (isNaN(quantity)) throw new ErrorUJDB("Invalid value", "The `quantity` parameter must be a number")
@@ -127,11 +131,13 @@ class ultraJDB {
 
         let jsonRoute: Array<string> = key.split(".")
         let jsonObject: any = databasesObj[this.name];
+        var last: number = 0;
 
         for (const prop of jsonRoute) {
             if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
                 if (isNaN(jsonObject[prop])) throw new ErrorUJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not a number`)
                 jsonObject[prop] = jsonObject[prop] - quantity
+                last = jsonObject[prop]
             }
             jsonObject = jsonObject[prop];
         }
@@ -142,7 +148,7 @@ class ultraJDB {
             throw new ErrorUJDB("Writing error", "There was an error updating your database")
         }
 
-        return true
+        return last
     }
 }
 
