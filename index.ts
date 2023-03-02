@@ -110,6 +110,34 @@ class ultraJDB {
 
     /**
      * 
+     * @param {string} key The key to be searched
+     * @returns {boolean} True if found, false if not
+     */
+
+    has(key: string): boolean {
+        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
+
+        let response = read_file(this.path_database);
+        databasesObj[this.name] = response;
+
+        let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
+        let jsonObject: any = databasesObj[this.name];
+        var last: boolean = false;
+
+        for (const prop of jsonRoute) {
+            if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
+                if (!jsonObject[prop] && jsonObject[prop] != 0) {
+                    last = false
+                } else {
+                    last = true
+                }
+            }
+            jsonObject = jsonObject[prop];
+        }
+        return last
+    }
+    /**
+     * 
      * @param {string} key JSON key to be searched
      * @param {number} quantity Amount to be added
      * @returns {number} Updated value
