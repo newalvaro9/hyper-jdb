@@ -11,6 +11,21 @@ Instalation
 npm i ultrajson-db
 ```
 
+Table of contents
+------------------
+* [Usage](#usage)
+* [Methods](#methods)
+    * [set](#setkey-value)
+    * [get](#getkey)
+    * [has](#haskey)
+    * [delete](#deletekey)
+    * [push](#pushkey-value)
+    * [add](#addkey-quantity)
+    * [substract](#substractkey-quantity)
+    * [drop](#drop)
+* [Help](#help)
+* [License](#license)
+
 Usage
 -------
 ```js
@@ -202,6 +217,10 @@ Clears **all** the data in the .json file
 database.drop() // Clears the database 
 ```
 
+Help
+------
+Have any doubts or suggestions?<br>
+Send me a private message on Discord: **Álvaro#9410**
 
 License
 --------
