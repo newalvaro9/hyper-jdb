@@ -10,7 +10,10 @@ let databasesObj: any = {}
 class ultraJDB {
     path_folder: string
     path_database: string
-
+    /**
+     * @constructor Creates a database
+     * @param {string} name The name of your database
+     */
     constructor(public name: string) {
         if (!name) throw new ErrorUJDB("Missing argument", "You must provide a name to your database")
         const data = create_database(name)
@@ -19,7 +22,13 @@ class ultraJDB {
         this.path_database = data.path_database
     }
 
-    set(key: string, value: any) {
+    /**
+     * 
+     * @param {string} key JSON key to store data
+     * @param {any} value The value to be stored
+     * @returns {true}
+     */
+    set(key: string, value: any): true {
         if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to store the value");
         if (!value && value != 0) throw new ErrorUJDB("Missing argument", "You must provide a value to be stored in the database");
 
@@ -48,7 +57,12 @@ class ultraJDB {
         return true
     }
 
-    get(key: string) {
+    /**
+     * 
+     * @param {string} key JSON key to be searched
+     * @returns {any} The stored value
+     */
+    get(key: string): any {
         if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
 
         let response = read_file(this.path_database);
@@ -64,7 +78,12 @@ class ultraJDB {
         return jsonObject
     }
 
-    delete(key: string) {
+    /**
+     * 
+     * @param {string} key JSON key to search and delete
+     * @returns {true}
+     */
+    delete(key: string): true {
         if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be deleted from the database");
 
         let response = read_file(this.path_database);
@@ -89,7 +108,12 @@ class ultraJDB {
         return true
     }
 
-    add(key: string, quantity: number) {
+    /**
+     * 
+     * @param {string} key JSON key to be searched
+     * @param {number} quantity Amount to be added
+     * @returns {number} Updated value
+     */
     add(key: string, quantity: number): number {
         if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
         if (!quantity) throw new ErrorUJDB("Missing argument", `You must provide a number to be added to \`${key}\``)
@@ -100,7 +124,6 @@ class ultraJDB {
 
         let jsonRoute: Array<string> = key.split(".")
         let jsonObject: any = databasesObj[this.name];
-
         var last: number = 0;
         for (const prop of jsonRoute) {
             if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
@@ -120,7 +143,12 @@ class ultraJDB {
         return last
     }
 
-    substract(key: string, quantity: number) {
+    /**
+     * 
+     * @param {string} key JSON key to be searched
+     * @param {number} quantity Amount to be substracted
+     * @returns {number} Updated value
+     */
     substract(key: string, quantity: number): number {
         if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
         if (!quantity) throw new ErrorUJDB("Missing argument", `You must provide a number to be substracted from \`${key}\``)
