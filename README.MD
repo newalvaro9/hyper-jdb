@@ -36,8 +36,9 @@ database.set("language", "english")
     }
 */
 
-/* You can use dots to specify a new property */
+// You can use dots to specify a new property 
 database.set("user1.name", "Álvaro")
+
 /* 
     {
         "user1": {
