@@ -144,6 +144,43 @@ class ultraJDB {
         }
         return last
     }
+
+    /**
+     * 
+     * @param {string} key 
+     * @param {any} value 
+     * @returns The new array 
+     */
+
+    push(key: string, value: any): any {
+        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
+        if (!value && value != 0) throw new ErrorUJDB("Missing argument", "You must provide a value to be stored in the database");
+
+        let response = read_file(this.path_database);
+        databasesObj[this.name] = response;
+
+        let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
+        let jsonObject: any = databasesObj[this.name];
+        var last: Array<any> = []
+
+        for (const prop of jsonRoute) {
+            if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
+                if (!(Object.prototype.toString.call(jsonObject[prop]) == '[object Array]')) throw new ErrorUJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not an Array`)
+                jsonObject[prop].push(value)
+                last = jsonObject[prop]
+            }
+            jsonObject = jsonObject[prop];
+        }
+
+        try {
+            writeFileSync(this.path_database, JSON.stringify(databasesObj[this.name], null, 2), 'utf-8')
+        } catch (err) {
+            throw new ErrorUJDB("Writing error", "There was an error updating your database")
+        }
+
+        return last
+    }
+
     /**
      * 
      * @param {string} key JSON key to be searched
