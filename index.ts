@@ -83,7 +83,7 @@ class ultraJDB {
      * @param {string} key JSON key to search and delete
      * @returns {true}
      */
-    delete(key: string): true {
+    delete(key: string): boolean {
         if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be deleted from the database");
 
         let response = read_file(this.path_database);
@@ -94,7 +94,15 @@ class ultraJDB {
 
         for (const prop of jsonRoute) {
             if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
-                delete jsonObject[prop]
+                if (Object.prototype.toString.call(jsonObject) == '[object Array]') { /* Array */
+                    jsonObject = jsonObject.splice(prop, 1)
+                }
+                else if (!jsonObject[prop] && jsonObject[prop] != 0) { /* No value */
+                    return false
+                }
+                else { /* Value */
+                    delete jsonObject[prop]
+                }
             }
             jsonObject = jsonObject[prop];
         }
