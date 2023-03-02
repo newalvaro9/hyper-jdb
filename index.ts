@@ -35,7 +35,7 @@ class ultraJDB {
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
 
-        let jsonRoute: Array<string> = key.split(".")
+        let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
         let jsonObject: any = databasesObj[this.name];
 
         for (let i = 0; i < jsonRoute.length; i++) {
@@ -68,7 +68,7 @@ class ultraJDB {
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
 
-        let jsonRoute: Array<string> = key.split(".")
+        let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
         let jsonObject: any = databasesObj[this.name];
 
         for (const prop of jsonRoute) {
@@ -89,7 +89,7 @@ class ultraJDB {
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
 
-        let jsonRoute: Array<string> = key.split(".")
+        let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
         let jsonObject: any = databasesObj[this.name];
 
         for (const prop of jsonRoute) {
@@ -122,7 +122,7 @@ class ultraJDB {
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
 
-        let jsonRoute: Array<string> = key.split(".")
+        let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
         let jsonObject: any = databasesObj[this.name];
         var last: number = 0;
         for (const prop of jsonRoute) {
@@ -157,7 +157,7 @@ class ultraJDB {
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
 
-        let jsonRoute: Array<string> = key.split(".")
+        let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
         let jsonObject: any = databasesObj[this.name];
         var last: number = 0;
 
