@@ -41,6 +41,7 @@ database.set("user1.name", "Álvaro")
 
 /* 
     {
+        "language": "english",
         "user1": {
             "name": "Álvaro"
         }
