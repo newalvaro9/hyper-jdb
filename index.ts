@@ -8,13 +8,14 @@ import read_file from "./Utils/read_file"
 let databasesObj: any = {}
 
 class ultraJDB {
+    name: string
     path_folder: string
     path_database: string
     /**
      * @constructor Creates a database
      * @param {string} name The name of your database
      */
-    constructor(public name: string) {
+    constructor(name: string) {
         if (!name) throw new ErrorUJDB("Missing argument", "You must provide a name to your database")
         const data = create_database(name)
         this.name = name;
