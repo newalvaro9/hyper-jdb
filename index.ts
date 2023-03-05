@@ -4,6 +4,7 @@ import ErrorUJDB from "./Errors/ErrorUJDB"
 import create_database from "./Utils/create_database"
 import { writeFileSync } from "fs"
 import read_file from "./Utils/read_file"
+import is_empty from "./Utils/is_empty"
 
 let databasesObj: any = {}
 
@@ -16,7 +17,7 @@ class ultraJDB {
      * @param {string} name The name of your database
      */
     constructor(name: string) {
-        if (!name) throw new ErrorUJDB("Missing argument", "You must provide a name to your database")
+        if (is_empty(name)) throw new ErrorUJDB("Missing argument", "You must provide a name to your database")
         const data = create_database(name)
         this.name = name;
         this.path_folder = data.path_folder;
@@ -30,7 +31,7 @@ class ultraJDB {
      * @returns {true}
      */
     set(key: string, value: any): true {
-        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to store the value");
+        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to store the value");
         if (!value && value != 0) throw new ErrorUJDB("Missing argument", "You must provide a value to be stored in the database");
 
         let response = read_file(this.path_database);
@@ -64,7 +65,7 @@ class ultraJDB {
      * @returns {any} The stored value
      */
     get(key: string): any {
-        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
+        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
 
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
@@ -85,7 +86,7 @@ class ultraJDB {
      * @returns {true}
      */
     delete(key: string): boolean {
-        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be deleted from the database");
+        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be deleted from the database");
 
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
@@ -124,7 +125,7 @@ class ultraJDB {
      */
 
     has(key: string): boolean {
-        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
+        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
 
         let response = read_file(this.path_database);
         databasesObj[this.name] = response;
@@ -154,7 +155,7 @@ class ultraJDB {
      */
 
     push(key: string, value: any): any {
-        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
+        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
         if (!value && value != 0) throw new ErrorUJDB("Missing argument", "You must provide a value to be stored in the database");
 
         let response = read_file(this.path_database);
@@ -189,7 +190,7 @@ class ultraJDB {
      * @returns {number} Updated value
      */
     add(key: string, quantity: number): number {
-        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
+        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
         if (!quantity) throw new ErrorUJDB("Missing argument", `You must provide a number to be added to \`${key}\``)
         if (isNaN(quantity)) throw new ErrorUJDB("Invalid value", "The `quantity` parameter must be a number")
 
@@ -224,7 +225,7 @@ class ultraJDB {
      * @returns {number} Updated value
      */
     substract(key: string, quantity: number): number {
-        if (!key) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
+        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
         if (!quantity) throw new ErrorUJDB("Missing argument", `You must provide a number to be substracted from \`${key}\``)
         if (isNaN(quantity)) throw new ErrorUJDB("Invalid value", "The `quantity` parameter must be a number")
 
