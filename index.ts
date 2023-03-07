@@ -1,6 +1,6 @@
 // @ts-check
 
-import ErrorUJDB from "./Errors/ErrorUJDB"
+import ErrorUJDB from "./Utils/ErrorUJDB"
 import create_database from "./Utils/create_database"
 import { writeFileSync } from "fs"
 import read_file from "./Utils/read_file"

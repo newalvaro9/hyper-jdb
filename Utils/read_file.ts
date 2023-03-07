@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import ErrorUJDB from "../Errors/ErrorUJDB";
+import ErrorUJDB from "./ErrorUJDB";
 
 export default function read_file(db_path: string) {
     try {
