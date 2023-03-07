@@ -1,8 +1,7 @@
 // @ts-check
 
-import { mkdirp } from 'mkdirp'
+import { mkdirSync, writeFileSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
-import { writeFile, existsSync } from 'fs'
 import ErrorUJDB from '../Errors/ErrorUJDB'
 
 export default function create_database(name: string) {
@@ -10,12 +9,16 @@ export default function create_database(name: string) {
 
     let directory = join(dirname(require.main.filename), "databases")
 
-    mkdirp(directory).then(made => {
-        if (existsSync(`${directory}/${name}.json`)) return
-        writeFile(`${directory}/${name}.json`, JSON.stringify({}, null, 2), { flag: "wx" }, function (err) {
-            if (err) throw err
-        });
-    })
+    if (!existsSync(`${directory}`)) {
+        try {
+            mkdirSync(directory)
+            if (!existsSync(`${directory}/${name}.json`)) {
+                writeFileSync(`${directory}/${name}.json`, JSON.stringify({}, null, 2), { flag: "wx" })
+            }
+        } catch (err) {
+            throw err
+        }
+    }
 
     return {
         path_folder: directory,
