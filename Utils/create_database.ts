@@ -20,8 +20,5 @@ export default function create_database(name: string) {
         }
     }
 
-    return {
-        path_folder: directory,
-        path_database: join(directory, `${name}.json`)
-    }
+    return join(directory, `${name}.json`)
 }

@@ -9,7 +9,6 @@ import is_empty from "./Utils/is_empty"
 
 class ultraJDB {
     private name: string
-    private path_folder: string
     private path_database: string
     private databasesObj: any
 
@@ -19,10 +18,8 @@ class ultraJDB {
      */
     constructor(name: string) {
         if (is_empty(name)) throw new ErrorUJDB("Missing argument", "You must provide a name to your database")
-        const data = create_database(name)
         this.name = name;
-        this.path_folder = data.path_folder;
-        this.path_database = data.path_database;
+        this.path_database = create_database(name);
         this.databasesObj = {}
     }
 
