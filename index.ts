@@ -6,12 +6,12 @@ import { writeFileSync } from "fs"
 import read_file from "./Utils/read_file"
 import is_empty from "./Utils/is_empty"
 
-let databasesObj: any = {}
 
 class ultraJDB {
     name: string
     path_folder: string
     path_database: string
+    databasesObj: any
     /**
      * @constructor Creates a database
      * @param {string} name The name of your database
@@ -21,7 +21,8 @@ class ultraJDB {
         const data = create_database(name)
         this.name = name;
         this.path_folder = data.path_folder;
-        this.path_database = data.path_database
+        this.path_database = data.path_database;
+        this.databasesObj = {}
     }
 
     /**
@@ -35,10 +36,10 @@ class ultraJDB {
         if (!value && value != 0) throw new ErrorUJDB("Missing argument", "You must provide a value to be stored in the database");
 
         let response = read_file(this.path_database);
-        databasesObj[this.name] = response;
+        this.databasesObj[this.name] = response;
 
         let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
-        let jsonObject: any = databasesObj[this.name];
+        let jsonObject: any = this.databasesObj[this.name];
 
         for (let i = 0; i < jsonRoute.length; i++) {
             const prop = jsonRoute[i];
@@ -51,7 +52,7 @@ class ultraJDB {
         }
 
         try {
-            writeFileSync(this.path_database, JSON.stringify(databasesObj[this.name], null, 2), 'utf-8')
+            writeFileSync(this.path_database, JSON.stringify(this.databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
             throw new ErrorUJDB("Writing error", "There was an error updating your database")
         }
@@ -68,10 +69,10 @@ class ultraJDB {
         if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
 
         let response = read_file(this.path_database);
-        databasesObj[this.name] = response;
+        this.databasesObj[this.name] = response;
 
         let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
-        let jsonObject: any = databasesObj[this.name];
+        let jsonObject: any = this.databasesObj[this.name];
 
         for (const prop of jsonRoute) {
             jsonObject = jsonObject[prop];
@@ -89,10 +90,10 @@ class ultraJDB {
         if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be deleted from the database");
 
         let response = read_file(this.path_database);
-        databasesObj[this.name] = response;
+        this.databasesObj[this.name] = response;
 
         let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
-        let jsonObject: any = databasesObj[this.name];
+        let jsonObject: any = this.databasesObj[this.name];
 
         for (const prop of jsonRoute) {
             if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
@@ -110,7 +111,7 @@ class ultraJDB {
         }
 
         try {
-            writeFileSync(this.path_database, JSON.stringify(databasesObj[this.name], null, 2), 'utf-8')
+            writeFileSync(this.path_database, JSON.stringify(this.databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
             throw new ErrorUJDB("Writing error", "There was an error updating your database")
         }
@@ -128,10 +129,10 @@ class ultraJDB {
         if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
 
         let response = read_file(this.path_database);
-        databasesObj[this.name] = response;
+        this.databasesObj[this.name] = response;
 
         let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
-        let jsonObject: any = databasesObj[this.name];
+        let jsonObject: any = this.databasesObj[this.name];
         var last: boolean = false;
 
         for (const prop of jsonRoute) {
@@ -159,10 +160,10 @@ class ultraJDB {
         if (!value && value != 0) throw new ErrorUJDB("Missing argument", "You must provide a value to be stored in the database");
 
         let response = read_file(this.path_database);
-        databasesObj[this.name] = response;
+        this.databasesObj[this.name] = response;
 
         let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
-        let jsonObject: any = databasesObj[this.name];
+        let jsonObject: any = this.databasesObj[this.name];
         var last: Array<any> = []
 
         for (const prop of jsonRoute) {
@@ -175,7 +176,7 @@ class ultraJDB {
         }
 
         try {
-            writeFileSync(this.path_database, JSON.stringify(databasesObj[this.name], null, 2), 'utf-8')
+            writeFileSync(this.path_database, JSON.stringify(this.databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
             throw new ErrorUJDB("Writing error", "There was an error updating your database")
         }
@@ -195,10 +196,10 @@ class ultraJDB {
         if (isNaN(quantity)) throw new ErrorUJDB("Invalid value", "The `quantity` parameter must be a number")
 
         let response = read_file(this.path_database);
-        databasesObj[this.name] = response;
+        this.databasesObj[this.name] = response;
 
         let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
-        let jsonObject: any = databasesObj[this.name];
+        let jsonObject: any = this.databasesObj[this.name];
         var last: number = 0;
         for (const prop of jsonRoute) {
             if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
@@ -210,7 +211,7 @@ class ultraJDB {
         }
 
         try {
-            writeFileSync(this.path_database, JSON.stringify(databasesObj[this.name], null, 2), 'utf-8')
+            writeFileSync(this.path_database, JSON.stringify(this.databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
             throw new ErrorUJDB("Writing error", "There was an error updating your database")
         }
@@ -230,10 +231,10 @@ class ultraJDB {
         if (isNaN(quantity)) throw new ErrorUJDB("Invalid value", "The `quantity` parameter must be a number")
 
         let response = read_file(this.path_database);
-        databasesObj[this.name] = response;
+        this.databasesObj[this.name] = response;
 
         let jsonRoute: Array<string> = key.replace(/\[/g, ".").replace(/\]/g, "").split(".")
-        let jsonObject: any = databasesObj[this.name];
+        let jsonObject: any = this.databasesObj[this.name];
         var last: number = 0;
 
         for (const prop of jsonRoute) {
@@ -246,7 +247,7 @@ class ultraJDB {
         }
 
         try {
-            writeFileSync(this.path_database, JSON.stringify(databasesObj[this.name], null, 2), 'utf-8')
+            writeFileSync(this.path_database, JSON.stringify(this.databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
             throw new ErrorUJDB("Writing error", "There was an error updating your database")
         }
