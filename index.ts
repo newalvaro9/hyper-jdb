@@ -8,10 +8,11 @@ import is_empty from "./Utils/is_empty"
 
 
 class ultraJDB {
-    name: string
-    path_folder: string
-    path_database: string
-    databasesObj: any
+    private name: string
+    private path_folder: string
+    private path_database: string
+    private databasesObj: any
+
     /**
      * @constructor Creates a database
      * @param {string} name The name of your database
