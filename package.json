@@ -12,15 +12,14 @@
         "json",
         "database",
         "js-database",
+        "jsondatabase",
+        "json-database",
         "write",
         "read",
         "db"
     ],
     "author": "Álvaro Poblador",
     "license": "MIT",
-    "dependencies": {
-        "mkdirp": "^2.1.3"
-    },
     "devDependencies": {
         "@types/node": "^18.14.1"
     }
