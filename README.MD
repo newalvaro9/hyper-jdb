@@ -8,7 +8,7 @@
 Instalation
 -----------
 ```
-npm i ultrajsondb
+npm i ultrajson-db
 ```
 
 Table of contents
