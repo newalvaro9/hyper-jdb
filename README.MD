@@ -1,7 +1,7 @@
 # Ultra JSON Database (UltraJDB)
-![version](https://img.shields.io/npm/v/ultrajsondb)
-![license](https://img.shields.io/npm/l/ultrajsondb)
-![downloads](https://img.shields.io/npm/dt/ultrajsondb)
+![version](https://img.shields.io/npm/v/ultrajson-db)
+![license](https://img.shields.io/npm/l/ultrajson-db)
+![downloads](https://img.shields.io/npm/dt/ultrajson-db)
 
 > An amazing and simple json database
 
@@ -225,6 +225,6 @@ Send me a private message on Discord: **Álvaro#9410**
 License
 --------
 
-[MIT](https://github.com/newalvaro9/ultrajsondb/blob/main/LICENSE)
+[MIT](https://github.com/newalvaro9/ultrajson-db/blob/main/LICENSE)
 
 Copyright 2023, Álvaro Poblador
