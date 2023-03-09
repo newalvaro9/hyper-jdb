@@ -1,5 +1,5 @@
 {
-    "name": "ultrajson-db",
+    "name": "ultrajsondb",
     "version": "1.0.0",
     "description": "An amazing and simple json database",
     "main": "./dist/index.js",
