@@ -1,14 +1,14 @@
 # Ultra JSON Database (UltraJDB)
-![version](https://img.shields.io/npm/v/ultrajson-db)
-![license](https://img.shields.io/npm/l/ultrajson-db)
-![downloads](https://img.shields.io/npm/dt/ultrajson-db)
+![version](https://img.shields.io/npm/v/ultrajsondb)
+![license](https://img.shields.io/npm/l/ultrajsondb)
+![downloads](https://img.shields.io/npm/dt/ultrajsondb)
 
 > An amazing and simple json database
 
 Instalation
 -----------
 ```
-npm i ultrajson-db
+npm i ultrajsondb
 ```
 
 Table of contents
@@ -30,10 +30,10 @@ Usage
 -------
 ```js
 // Using Node.js `require()`
-const ultraJDB = require('ultrajson-db');
+const ultraJDB = require('ultrajsondb');
 
 // Using ES6 imports
-import ultraJDB from 'ultrajson-db';
+import ultraJDB from 'ultrajsondb';
 
 const database = new ultraJDB("users") // This will create the folder `databases` and the `users.json` file
 ```
@@ -225,6 +225,6 @@ Send me a private message on Discord: **Álvaro#9410**
 License
 --------
 
-[MIT](https://github.com/newalvaro9/ultrajson-db/blob/main/LICENSE)
+[MIT](https://github.com/newalvaro9/ultrajsondb/blob/main/LICENSE)
 
 Copyright 2023, Álvaro Poblador
