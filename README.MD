@@ -30,10 +30,10 @@ Usage
 -------
 ```js
 // Using Node.js `require()`
-const ultraJDB = require('ultrajsondb');
+const ultraJDB = require('ultrajson-db');
 
 // Using ES6 imports
-import ultraJDB from 'ultrajsondb';
+import ultraJDB from 'ultrajson-db';
 
 const database = new ultraJDB("users") // This will create the folder `databases` and the `users.json` file
 ```
