@@ -2,7 +2,7 @@
 
 import { mkdirSync, writeFileSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
-import ErrorUJDB from './ErrorUJDB'
+import ErrorUJDB from './ErrorHJDB'
 
 export default function create_database(name: string) {
     if (!require.main?.filename) throw new ErrorUJDB("Folder creation error", "Cannot create folder \"databases\"")

@@ -1,6 +1,6 @@
 {
-    "name": "ultrajson-db",
-    "version": "0.0.2",
+    "name": "hyper-jdb",
+    "version": "0.0.1",
     "description": "An amazing and simple json database",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -18,8 +18,16 @@
         "read",
         "db"
     ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/newalvaro9/hyper-jdb.git"
+    },
     "author": "Álvaro Poblador",
     "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/newalvaro9/hyper-jdb/issues"
+    },
+    "homepage": "https://github.com/newalvaro9/hyper-jdb#readme",
     "devDependencies": {
         "@types/node": "^18.14.1"
     }

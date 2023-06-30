@@ -1,13 +1,13 @@
 // @ts-check
 
-import ErrorUJDB from "./Utils/ErrorUJDB"
+import ErrorHJDB from "./Utils/ErrorHJDB"
 import create_database from "./Utils/create_database"
 import { writeFileSync } from "fs"
 import read_file from "./Utils/read_file"
 import is_empty from "./Utils/is_empty"
 
 
-class ultraJDB {
+class hyperJDB {
     private name: string
     private path_database: string
     private databasesObj: any
@@ -17,7 +17,7 @@ class ultraJDB {
      * @param {string} name The name of your database
      */
     constructor(name: string) {
-        if (is_empty(name)) throw new ErrorUJDB("Missing argument", "You must provide a name to your database")
+        if (is_empty(name)) throw new ErrorHJDB("Missing argument", "You must provide a name to your database")
         this.name = name;
         this.path_database = create_database(name);
         this.databasesObj = {}
@@ -30,8 +30,8 @@ class ultraJDB {
      * @returns {true}
      */
     set(key: string, value: any): true {
-        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to store the value");
-        if (!value && value != 0) throw new ErrorUJDB("Missing argument", "You must provide a value to be stored in the database");
+        if (is_empty(key)) throw new ErrorHJDB("Missing argument", "You must provide a key to store the value");
+        if (!value && value != 0) throw new ErrorHJDB("Missing argument", "You must provide a value to be stored in the database");
 
         let response = read_file(this.path_database);
         this.databasesObj[this.name] = response;
@@ -52,7 +52,7 @@ class ultraJDB {
         try {
             writeFileSync(this.path_database, JSON.stringify(this.databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
-            throw new ErrorUJDB("Writing error", "There was an error updating your database")
+            throw new ErrorHJDB("Writing error", "There was an error updating your database")
         }
 
         return true
@@ -64,7 +64,7 @@ class ultraJDB {
      * @returns {any} The stored value
      */
     get(key: string): any {
-        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
+        if (is_empty(key)) throw new ErrorHJDB("Missing argument", "You must provide a key to be searched in the database");
 
         let response = read_file(this.path_database);
         this.databasesObj[this.name] = response;
@@ -85,7 +85,7 @@ class ultraJDB {
      * @returns {true}
      */
     delete(key: string): boolean {
-        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be deleted from the database");
+        if (is_empty(key)) throw new ErrorHJDB("Missing argument", "You must provide a key to be deleted from the database");
 
         let response = read_file(this.path_database);
         this.databasesObj[this.name] = response;
@@ -111,7 +111,7 @@ class ultraJDB {
         try {
             writeFileSync(this.path_database, JSON.stringify(this.databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
-            throw new ErrorUJDB("Writing error", "There was an error updating your database")
+            throw new ErrorHJDB("Writing error", "There was an error updating your database")
         }
 
         return true
@@ -124,7 +124,7 @@ class ultraJDB {
      */
 
     has(key: string): boolean {
-        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
+        if (is_empty(key)) throw new ErrorHJDB("Missing argument", "You must provide a key to be searched in the database");
 
         let response = read_file(this.path_database);
         this.databasesObj[this.name] = response;
@@ -154,8 +154,8 @@ class ultraJDB {
      */
 
     push(key: string, value: any): any {
-        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be searched in the database");
-        if (!value && value != 0) throw new ErrorUJDB("Missing argument", "You must provide a value to be stored in the database");
+        if (is_empty(key)) throw new ErrorHJDB("Missing argument", "You must provide a key to be searched in the database");
+        if (!value && value != 0) throw new ErrorHJDB("Missing argument", "You must provide a value to be stored in the database");
 
         let response = read_file(this.path_database);
         this.databasesObj[this.name] = response;
@@ -166,7 +166,7 @@ class ultraJDB {
 
         for (const prop of jsonRoute) {
             if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
-                if (!(Object.prototype.toString.call(jsonObject[prop]) == '[object Array]')) throw new ErrorUJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not an Array`)
+                if (!(Object.prototype.toString.call(jsonObject[prop]) == '[object Array]')) throw new ErrorHJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not an Array`)
                 jsonObject[prop].push(value)
                 last = jsonObject[prop]
             }
@@ -176,7 +176,7 @@ class ultraJDB {
         try {
             writeFileSync(this.path_database, JSON.stringify(this.databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
-            throw new ErrorUJDB("Writing error", "There was an error updating your database")
+            throw new ErrorHJDB("Writing error", "There was an error updating your database")
         }
 
         return last
@@ -189,9 +189,9 @@ class ultraJDB {
      * @returns {number} Updated value
      */
     add(key: string, quantity: number): number {
-        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
-        if (!quantity) throw new ErrorUJDB("Missing argument", `You must provide a number to be added to \`${key}\``)
-        if (isNaN(quantity)) throw new ErrorUJDB("Invalid value", "The `quantity` parameter must be a number")
+        if (is_empty(key)) throw new ErrorHJDB("Missing argument", "You must provide a key to be operated in the database");
+        if (!quantity) throw new ErrorHJDB("Missing argument", `You must provide a number to be added to \`${key}\``)
+        if (isNaN(quantity)) throw new ErrorHJDB("Invalid value", "The `quantity` parameter must be a number")
 
         let response = read_file(this.path_database);
         this.databasesObj[this.name] = response;
@@ -201,7 +201,7 @@ class ultraJDB {
         var last: number = 0;
         for (const prop of jsonRoute) {
             if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
-                if (isNaN(jsonObject[prop])) throw new ErrorUJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not a Number`)
+                if (isNaN(jsonObject[prop])) throw new ErrorHJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not a Number`)
                 jsonObject[prop] = jsonObject[prop] + quantity
                 last = jsonObject[prop]
             }
@@ -211,7 +211,7 @@ class ultraJDB {
         try {
             writeFileSync(this.path_database, JSON.stringify(this.databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
-            throw new ErrorUJDB("Writing error", "There was an error updating your database")
+            throw new ErrorHJDB("Writing error", "There was an error updating your database")
         }
 
         return last
@@ -224,9 +224,9 @@ class ultraJDB {
      * @returns {number} Updated value
      */
     substract(key: string, quantity: number): number {
-        if (is_empty(key)) throw new ErrorUJDB("Missing argument", "You must provide a key to be operated in the database");
-        if (!quantity) throw new ErrorUJDB("Missing argument", `You must provide a number to be substracted from \`${key}\``)
-        if (isNaN(quantity)) throw new ErrorUJDB("Invalid value", "The `quantity` parameter must be a number")
+        if (is_empty(key)) throw new ErrorHJDB("Missing argument", "You must provide a key to be operated in the database");
+        if (!quantity) throw new ErrorHJDB("Missing argument", `You must provide a number to be substracted from \`${key}\``)
+        if (isNaN(quantity)) throw new ErrorHJDB("Invalid value", "The `quantity` parameter must be a number")
 
         let response = read_file(this.path_database);
         this.databasesObj[this.name] = response;
@@ -237,7 +237,7 @@ class ultraJDB {
 
         for (const prop of jsonRoute) {
             if (prop == jsonRoute.slice(-1)[0]) { /* Last iteration of the loop */
-                if (isNaN(jsonObject[prop])) throw new ErrorUJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not a number`)
+                if (isNaN(jsonObject[prop])) throw new ErrorHJDB("Invalid type", `Stored value: \`${jsonObject[prop]}\` is not a number`)
                 jsonObject[prop] = jsonObject[prop] - quantity
                 last = jsonObject[prop]
             }
@@ -247,7 +247,7 @@ class ultraJDB {
         try {
             writeFileSync(this.path_database, JSON.stringify(this.databasesObj[this.name], null, 2), 'utf-8')
         } catch (err) {
-            throw new ErrorUJDB("Writing error", "There was an error updating your database")
+            throw new ErrorHJDB("Writing error", "There was an error updating your database")
         }
 
         return last
@@ -261,10 +261,10 @@ class ultraJDB {
         try {
             writeFileSync(this.path_database, JSON.stringify({}, null, 2), 'utf-8')
         } catch (err) {
-            throw new ErrorUJDB("Writing error", "There was an error updating your database")
+            throw new ErrorHJDB("Writing error", "There was an error updating your database")
         }
         return true
     }
 }
 
-export = ultraJDB
+export = hyperJDB;
